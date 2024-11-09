@@ -69,13 +69,13 @@ public class ActorController {
     )
     @GetMapping("/page")
     public ResponseEntity<List<ActorDto>> getPageNumber(
-            @Parameter(description = "Page number to fetch", example = "0")
+            @Parameter(description = "Page number to fetch", example = "1")
             @RequestParam("pageNumber") Optional<Integer> pageNumber,
 
             @Parameter(description = "Number of actors per page", example = "10")
             @RequestParam("pageSize") Optional<Integer> pageSize
     ) {
-        int page = pageNumber.orElse(0);
+        int page = pageNumber.orElse(1);
         int size = pageSize.orElse(10);
         return ResponseEntity.ok()
                 .body(actorService.getActorsWithPagination(page, size));
@@ -94,16 +94,16 @@ public class ActorController {
     )
     @GetMapping("/search")
     public ResponseEntity<List<ActorDto>> search(
-            @Parameter(description = "Term to search actors by (e.g. 'dway')")
+            @Parameter(description = "Term to search actors by (e.g. '')")
             @RequestParam String searchTerm,
 
-            @Parameter(description = "Page number to fetch", example = "0")
+            @Parameter(description = "Page number to fetch", example = "1")
             @RequestParam("pageNumber") Optional<Integer> pageNumber,
 
             @Parameter(description = "Number of actors per page", example = "10")
             @RequestParam("pageSize") Optional<Integer> pageSize
     ) {
-        int page = pageNumber.orElse(0);
+        int page = pageNumber.orElse(1);
         int size = pageSize.orElse(10);
         return ResponseEntity.ok()
                 .body(actorService.searchActors(searchTerm, page, size));
