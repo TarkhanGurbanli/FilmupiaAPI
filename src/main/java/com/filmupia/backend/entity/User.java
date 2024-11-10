@@ -19,6 +19,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Table(name = "users")
 public class User extends BaseEntity {
+
     @NotBlank(message = "Username cannot be blank")
     @Column(nullable = false, unique = true)
     private String username;

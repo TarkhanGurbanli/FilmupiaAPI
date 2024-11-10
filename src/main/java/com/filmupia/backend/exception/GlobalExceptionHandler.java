@@ -1,6 +1,8 @@
 package com.filmupia.backend.exception;
 
 import com.filmupia.backend.model.ErrorResponseModel;
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -10,6 +12,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.context.request.WebRequest;
 
 import java.time.LocalDateTime;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
@@ -40,6 +44,24 @@ public class GlobalExceptionHandler {
                 LocalDateTime.now()
         );
         return new ResponseEntity<>(errorResponseModel, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(ConstraintViolationException.class)
+    public ResponseEntity<ErrorResponseModel> handleConstraintViolationException(ConstraintViolationException ex, WebRequest request) {
+        Set<String> violations = ex.getConstraintViolations()
+                .stream()
+                .map(ConstraintViolation::getMessage)
+                .collect(Collectors.toSet());
+
+        String errorMessage = String.join(", ", violations);
+
+        ErrorResponseModel errorResponseModel = new ErrorResponseModel(
+                request.getDescription(false),
+                HttpStatus.BAD_REQUEST,
+                errorMessage,
+                LocalDateTime.now()
+        );
+        return new ResponseEntity<>(errorResponseModel, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(RuntimeException.class)
