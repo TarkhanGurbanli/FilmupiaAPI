@@ -2,7 +2,6 @@ package com.filmupia.backend.controller;
 
 import com.filmupia.backend.constants.Constants;
 import com.filmupia.backend.model.ResponseModel;
-import com.filmupia.backend.model.actor.ActorDto;
 import com.filmupia.backend.model.director.CreateDirectorDto;
 import com.filmupia.backend.model.director.DirectorDto;
 import com.filmupia.backend.model.director.UpdateDirectorDto;
@@ -25,7 +24,8 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/v1/directors")
 @RequiredArgsConstructor
-@Tag(name = "Directors Management", description = "Manage directors in the system")
+@CrossOrigin(origins = "http://localhost:3000")
+//@Tag(name = "Directors Management", description = "Manage directors in the system")
 public class DirectorController {
     private final DirectorService directorService;
 
@@ -44,7 +44,7 @@ public class DirectorController {
                     @ApiResponse(
                             responseCode = "200",
                             description = "Director found",
-                            content = @Content(schema = @Schema(implementation = ActorDto.class))),
+                            content = @Content(schema = @Schema(implementation = DirectorDto.class))),
                     @ApiResponse(responseCode = "404", description = "Director not found")
             }
     )
@@ -64,7 +64,7 @@ public class DirectorController {
                     @ApiResponse(
                             responseCode = "200",
                             description = "List of directors",
-                            content = @Content(schema = @Schema(implementation = ActorDto.class)))
+                            content = @Content(schema = @Schema(implementation = DirectorDto.class)))
             }
     )
     @GetMapping("/page")
