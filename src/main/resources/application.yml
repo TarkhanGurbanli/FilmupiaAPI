@@ -24,6 +24,17 @@ spring:
       max-file-size: 2MB
       max-request-size: 3MB
 
+# JSON Web Token (JWT)
+jwt:
+  secret_key: ${JWT_SECRET_KEY}
+  expiration_time: ${JWT_EXPIRATION_TIME}
+  refresh_expiration_time: ${JWT_REFRESH_TOKEN_EXPIRATION}
+
+cloudinary:
+  cloudName: ${CLOUDINARY_CLOUD_NAME}
+  apiKey: ${CLOUDINARY_API_KEY}
+  secretKey: ${CLOUDINARY_API_SECRET}
+
 # Port Configuration
 server:
   port: 9000

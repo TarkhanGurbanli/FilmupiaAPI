@@ -50,7 +50,7 @@ public class MovieActorController {
     )
     @GetMapping("/{movieActorId}")
     public ResponseEntity<MovieActorDto> getById(
-            @Parameter(description = "ID of the movie_actors to be retrieved")
+            @Parameter(description = "ID of the movie_actor to be retrieved")
             @PathVariable("movieActorId") Long movieActorId
     ) {
         return ResponseEntity.ok()
@@ -147,4 +147,3 @@ public class MovieActorController {
         );
     }
 }
-

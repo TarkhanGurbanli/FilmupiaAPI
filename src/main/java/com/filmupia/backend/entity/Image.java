@@ -5,7 +5,6 @@ import com.filmupia.backend.entity.enums.ImageType;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDateTime;
 
 @Getter @Setter
 @AllArgsConstructor
@@ -20,10 +19,6 @@ public class Image extends BaseEntity {
     @Column(nullable = false)
     private String imageUrl;
 
-    private int status;
-    private String message;
-
     @Enumerated(EnumType.STRING)
     private ImageType imageType;
-    private LocalDateTime uploadedAt;
 }
