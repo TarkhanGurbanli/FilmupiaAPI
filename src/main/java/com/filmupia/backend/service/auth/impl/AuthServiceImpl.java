@@ -1,21 +1,16 @@
 package com.filmupia.backend.service.auth.impl;
 
 import com.filmupia.backend.constants.Constants;
-import com.filmupia.backend.entity.Image;
 import com.filmupia.backend.entity.User;
-import com.filmupia.backend.entity.enums.ImageType;
 import com.filmupia.backend.entity.enums.Role;
 import com.filmupia.backend.exception.FilmupiaApiException;
 import com.filmupia.backend.exception.ResourceNotFoundException;
 import com.filmupia.backend.model.auth.AuthResponse;
-import com.filmupia.backend.model.auth.JwtModel;
 import com.filmupia.backend.model.auth.LoginDto;
 import com.filmupia.backend.model.auth.RegisterDto;
 import com.filmupia.backend.repository.UserRepository;
-import com.filmupia.backend.service.ImageService;
 import com.filmupia.backend.service.auth.AuthService;
 import com.filmupia.backend.service.auth.JwtService;
-import com.filmupia.backend.service.auth.utils.JwtUtil;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -23,7 +18,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 @Service
 @Transactional
@@ -35,8 +29,6 @@ public class AuthServiceImpl implements AuthService {
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
     private final ModelMapper modelMapper;
-    private final JwtUtil jwtUtil;
-    private final ImageService imageService;
 
     @Override
     public AuthResponse register(RegisterDto request) {
@@ -118,22 +110,5 @@ public class AuthServiceImpl implements AuthService {
                 Constants.STATUS_OK,
                 "User role toggled and tokens refreshed.",
                 newAccessToken, newRefreshToken);
-    }
-
-    @Override
-    public String uploadProfileImage(String token, MultipartFile file) throws Exception {
-
-        JwtModel jwtModel = jwtUtil.decodeToken(token);
-        Long userId = jwtModel.getUserId();
-
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new ResourceNotFoundException("User", "id", userId));
-
-        Image image = imageService.uploadImage(file, "profile_images", ImageType.USER);
-
-        user.setProfileImageUrl(image.getImageUrl());
-        userRepository.save(user);
-
-        return image.getImageUrl();
     }
 }

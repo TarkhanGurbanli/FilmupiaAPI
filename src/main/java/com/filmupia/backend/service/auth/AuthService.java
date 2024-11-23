@@ -10,5 +10,4 @@ public interface AuthService {
     AuthResponse login(LoginDto request);
     AuthResponse refreshAccessToken(String refreshToken);
     AuthResponse toggleUserRole(Long userId);
-    String uploadProfileImage(String token, MultipartFile file) throws Exception;
 }
