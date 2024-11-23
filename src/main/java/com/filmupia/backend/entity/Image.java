@@ -15,10 +15,10 @@ import lombok.*;
 public class Image extends BaseEntity {
     @Column(nullable = false)
     private String imageName;
-
     @Column(nullable = false)
     private String imageUrl;
-
+    private int status;
+    private String message;
     @Enumerated(EnumType.STRING)
     private ImageType imageType;
 }

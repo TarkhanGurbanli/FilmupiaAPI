@@ -24,6 +24,15 @@ spring:
       max-file-size: 2MB
       max-request-size: 3MB
 
+# Google Drive API
+google:
+  service-account-key-path: ${GOOGLE_SERVICE_ACCOUNT_KEY_PATH}
+  folders:
+    book: ${BOOK_FOLDER_ID}
+    author: ${AUTHOR_FOLDER_ID}
+    user: ${USER_FOLDER_ID}
+    blog: ${BLOG_FOLDER_ID}
+
 # JSON Web Token (JWT)
 jwt:
   secret_key: ${JWT_SECRET_KEY}
@@ -31,9 +40,9 @@ jwt:
   refresh_expiration_time: ${JWT_REFRESH_TOKEN_EXPIRATION}
 
 cloudinary:
-  cloudName: ${CLOUDINARY_CLOUD_NAME}
-  apiKey: ${CLOUDINARY_API_KEY}
-  secretKey: ${CLOUDINARY_API_SECRET}
+
+
+
 
 # Port Configuration
 server:
