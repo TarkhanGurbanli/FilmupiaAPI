@@ -6,6 +6,9 @@ build/
 !**/src/test/**/build/
 .env/
 .env
+.cred.json/
+.cred.json
+cred.json
 
 ### STS ###
 .apt_generated

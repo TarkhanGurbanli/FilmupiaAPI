@@ -42,7 +42,8 @@ dependencies {
 	implementation 'io.jsonwebtoken:jjwt-api:0.12.5'
 	runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.12.5'
 	runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.12.5'
-	implementation 'com.cloudinary:cloudinary-http44:1.31.0';
+	implementation 'com.google.apis:google-api-services-drive:v3-rev20240914-2.0.0'
+	implementation 'com.google.api-client:google-api-client:2.7.0'
 }
 
 tasks.named('test') {

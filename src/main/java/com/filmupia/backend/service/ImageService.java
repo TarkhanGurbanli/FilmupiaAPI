@@ -1,10 +1,11 @@
 package com.filmupia.backend.service;
 
-import com.filmupia.backend.model.image.ImageModel;
-import org.springframework.http.ResponseEntity;
+import com.filmupia.backend.entity.Image;
+import com.filmupia.backend.entity.enums.ImageType;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Map;
 
 public interface ImageService {
-    ResponseEntity<Map> uploadImage(ImageModel imageModel);
+    Image uploadImage(MultipartFile file, String folderName, ImageType imageType);
 }
