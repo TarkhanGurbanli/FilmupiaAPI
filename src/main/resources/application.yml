@@ -28,8 +28,6 @@ spring:
 google:
   service-account-key-path: ${GOOGLE_SERVICE_ACCOUNT_KEY_PATH}
   folders:
-    book: ${BOOK_FOLDER_ID}
-    author: ${AUTHOR_FOLDER_ID}
     user: ${USER_FOLDER_ID}
     blog: ${BLOG_FOLDER_ID}
 
@@ -38,11 +36,6 @@ jwt:
   secret_key: ${JWT_SECRET_KEY}
   expiration_time: ${JWT_EXPIRATION_TIME}
   refresh_expiration_time: ${JWT_REFRESH_TOKEN_EXPIRATION}
-
-cloudinary:
-
-
-
 
 # Port Configuration
 server:

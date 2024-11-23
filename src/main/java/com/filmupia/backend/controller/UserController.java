@@ -27,7 +27,7 @@ public class UserController {
 
     private final UserService userService;
 
-    @PatchMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PatchMapping(value = "/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @Operation(summary = "Upload a user's profile image",
             description = "Allows a user to upload a new profile image.")
     public ResponseEntity<ResponseModel> uploadImage(

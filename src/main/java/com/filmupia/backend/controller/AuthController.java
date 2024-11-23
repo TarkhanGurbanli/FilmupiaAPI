@@ -1,24 +1,18 @@
 package com.filmupia.backend.controller;
 
-import com.filmupia.backend.constants.Constants;
-import com.filmupia.backend.model.ResponseModel;
 import com.filmupia.backend.model.auth.AuthResponse;
 import com.filmupia.backend.model.auth.LoginDto;
 import com.filmupia.backend.model.auth.RegisterDto;
 import com.filmupia.backend.service.auth.AuthService;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
 
 @RestController
 @RequestMapping("/api/v1/auths")
@@ -72,24 +66,5 @@ public class AuthController {
     public ResponseEntity<AuthResponse> toggleUserRole(@PathVariable Long userId) {
         AuthResponse response = authService.toggleUserRole(userId);
         return ResponseEntity.ok(response);
-    }
-
-    @PostMapping(value = "/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    @Operation(summary = "Create a new image",
-            description = "Creates a new image with the provided details.")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "User image created successfully"),
-            @ApiResponse(responseCode = "400", description = "Invalid image data")
-    })
-    public ResponseEntity<ResponseModel> uploadImage(
-            @Parameter(description = "Authorization token") @RequestHeader("Authorization") String token,
-            @ModelAttribute MultipartFile multipartFile
-    ) throws Exception {
-        authService.uploadProfileImage(token, multipartFile);
-        return ResponseEntity.status(HttpStatus.CREATED)
-                .body(new ResponseModel(
-                        Constants.STATUS_OK,
-                        Constants.MESSAGE_CREATED_SUCCESSFULLY
-                ));
     }
 }
